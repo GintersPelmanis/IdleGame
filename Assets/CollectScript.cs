@@ -23,7 +23,7 @@ public class CollectScript : MonoBehaviour
 
     void CalculateResources()
     {
-        CollectableWheat  = (System.DateTime.UtcNow - CollectionTimer.LastCollect).TotalSeconds * Resources.Wheatph)-1;
+        CollectableWheat  = ((System.DateTime.UtcNow - CollectionTimer.LastCollect).TotalSeconds * Resources.Wheatph)-1;
     }
 
     public void CollectResources()
