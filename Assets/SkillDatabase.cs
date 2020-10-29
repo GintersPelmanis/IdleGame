@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillDatabase
+public static class SkillDatabase
 {
-    public  List<Skill> Skills;
+     public  static List<Skill> Skills;
 
-    public void CreateItemList()
+    public static void CreateSkillList()
     {
         Skills = new List<Skill>()
         {
-            new Skill(0,"Warrior Passive","Extra melle","Warrior",
+            new Skill(3,"Warrior Passive","Extra melle","Warrior",
             new Dictionary<string, double>
             {
                 {"DamageMulti", 1.20 },
@@ -30,12 +30,12 @@ public class SkillDatabase
         };
     }
 
-    public Skill GetSkill(int id)
+    public static Skill GetSkill(int id)
     {
         return Skills.Find(skill => skill.id == id);
     }
 
-    public Skill GetSkill(string SkillName)
+    public static Skill GetSkill(string SkillName)
     {
         return Skills.Find(skill => skill.Name == SkillName);
     }

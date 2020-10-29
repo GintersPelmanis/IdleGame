@@ -12,7 +12,7 @@ public class CollectionTimer{
 public class CollectScript : MonoBehaviour
 {
 
-    public int CollectableWheat;
+    public double CollectableWheat;
 
     // Start is called before the first frame update
     void Start()

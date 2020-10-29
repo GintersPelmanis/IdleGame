@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Video;
-using UnityEngine.PlayerLoop;
-using System.Xml.XPath;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.EventSystems;
 
 public class Monster : MonoBehaviour
 {
@@ -20,6 +17,7 @@ public class Monster : MonoBehaviour
     private float GemChance = 0.5f;
     private double GemValue;
     private double xpValue;
+    private int type;
 
     void Start()
     {
@@ -27,6 +25,8 @@ public class Monster : MonoBehaviour
         GemValue = 1;
         xpValue = Math.Round(MonsterHP * 0.1);
         rand = new System.Random();
+        System.Random rnd = new System.Random();
+        type = rnd.Next(1, 3);
     }
 
     void Update()
@@ -34,6 +34,14 @@ public class Monster : MonoBehaviour
         if (MonsterHP <= 0)
         {
             MonterKill();
+        }
+
+        if (Dmg.attacktype!= 0)
+        {
+            MonsterDMG();
+            Debug.Log("special attack detected");
+            HpText.text = "HP = " + Math.Round(MonsterHP);
+            return;
         }
 
         //used for testing with mouse on pc
@@ -48,8 +56,11 @@ public class Monster : MonoBehaviour
         {
             if (Input.GetTouch(touch.fingerId).phase == TouchPhase.Ended)
             {
-                MonsterDMG();
-                Debug.Log(touch.fingerId + " was pressed");
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    MonsterDMG();
+                    Debug.Log(touch.fingerId + " finga was pressed");
+                }
             }
         }
         HpText.text = "HP = " + Math.Round(MonsterHP);
@@ -103,12 +114,12 @@ public class Monster : MonoBehaviour
 
     void MonsterDMG()
     {
-        MonsterHP -= Dmg.Calc();
+        MonsterHP -= Dmg.Calc(type);
     }
 
     void BossKill()
     {
-        //change of event or something
+        //change of stage or something i dunno
         MonsterManager.StageClear();
     }
 

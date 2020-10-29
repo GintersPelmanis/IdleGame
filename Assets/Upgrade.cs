@@ -12,13 +12,6 @@ public class Upgrade : MonoBehaviour
     public static double DMGPrice = 10;
 
 
-
-    void Start()
-    {
-
-    }
-
-
     public void UpgradeDOT()
     {
 
